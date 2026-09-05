@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>FitCheck</h2>
+        </div>
+        <nav class="side-nav">
+            <a href="index.html" class="nav-item active">
+                <span>⌂</span>
+                <p>Dashboard</p>
+            </a>
+            <a href="tasks.html" class="nav-item">
+                <span>✓</span>
+                <p>Tasks</p>
+            </a>
+            <a href="habits.html" class="nav-item">
+                <span>♡</span>
+                <p>Habits</p>
+            </a>
+            <a href="water.html" class="nav-item">
+                <span>💧</span>
+                <p>Water</p>
+            </a>
+            <a href="sleep.html" class="nav-item">
+                <span>☾</span>
+                <p>Sleep</p>
+            </a>
+            <a href="quotes.html" class="nav-item">
+                <span>✦</span>
+                <p>Quotes</p>
+            </a>
+            <a href="summary.html" class="nav-item">
+                <span>▣</span>
+                <p>Summary</p>
+            </a>
+            <a href="timer.html" class="nav-item">
+                <span>⏱</span>
+                <p>Timer</p>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- main content -->
+    <main class="main-content">
+        <header class="top-section">
+            <div>
+                <p class="small-heading">YOUR PERSONAL WELLNESS SPACE</p>
+                <h1>Welcome to FitCheck</h1>
+                <p>Track your progress. Build better habits. Stay consistent.</p>
+            </div>
+            <div class="date-box">
+                <p id="day"></p>
+                <h2 id="date"></h2>
+                <p id="clock"></p>
+            </div>
+        </header>
+
+        <!-- dashboard cards -->
+        <section class="dashboard-grid"></section>
+            <div class="dashboard-card">
+                <div class="card-heading">
+                    <h3>Today's Tasks</h3>
+                    <span>✓</span>
+                </div>
+                <h2 id="taskProgress">0 / 0</h2>
+                <p>Tasks completed</p>
+                <a href="tasks.html" class="card-button">
+                    View Tasks
+                </a>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-heading">
+                    <h3>Water Intake</h3>
+                    <span>💧</span>
+                </div>
+                <h2 id="dashboardWater">0 ml</h2>
+                <p id="dashboardWaterGoal">Goal: 2500 ml</p>
+                <a href="water.html" class="card-button">
+                    Track Water
+                </a>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-heading">
+                    <h3>Sleep</h3>
+                    <span>☾</span>
+                </div>
+                <h2 id="dashboardSleep">No record</h2>
+                <p>Today's sleep</p>
+                <a href="sleep.html" class="card-button">
+                    View Sleep
+                </a>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-heading">
+                    <h3>Today's Habits</h3>
+                    <span>♡</span>
+                </div>
+                <h2 id="dashboardHabits">0%</h2>
+                <p>Habits completed today</p>
+                <a href="habits.html" class="card-button">
+                    View Habits
+                </a>
+            </div>
+        </section>
+
+        <!-- mid sect. -->
+        <section class="dashboard-two-column">
+            <div class="large-card">
+                <div class="section-title">
+                    <div>
+                        <p class="small-heading">MONTHLY HABIT TRACKER</p>
+                        <h2 id="dashboardMonth">Month</h2>
+                    </div>
+                    <a href="habits.html">View all →</a>
+                </div>
+                <div id="dashboardHabitPreview" class="habit-preview">
+                    No habits added yet.
+                </div>
+            </div>
+            <div class="large-card quote-card">
+                <p class="small-heading">DAILY MOTIVATION</p>
+                <div id="dashboardQuote">
+                    Loading motivation...
+                </div>
+                <p id="dashboardAuthor"></p>
+                <div class="quote-buttons">
+                    <button id="newQuoteButton">New Quote</button>
+                    <button id="saveDashboardQuote">♡ Save</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- bottom sect. -->
+        <section class="bottom-grid">
+            <div class="large-card">
+                <div class="section-title">
+                    <div>
+                        <p class="small-heading">THIS WEEK</p>
+                        <h2>Weekly Progress</h2>
+                    </div>
+                    <a href="summary.html">View Summary →</a>
+                </div>
+                <div class="progress-row">
+                    <p>Tasks</p>
+                    <div class="progress-bar">
+                        <div id="taskBar"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <p>Habits</p>
+                    <div class="progress-bar">
+                        <div id="habitBar"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <p>Water</p>
+                    <div class="progress-bar">
+                        <div id="waterBar"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <p>Sleep</p>
+                    <div class="progress-bar">
+                        <div id="sleepBar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="large-card timer-preview">
+                <p class="small-heading">FOCUS TIMER</p>
+                <h2 id="dashboardTimer">25:00</h2>
+                <a href="timer.html" class="timer-button">
+                    Open Timer
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
