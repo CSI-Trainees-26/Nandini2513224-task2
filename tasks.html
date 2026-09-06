@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitCheck - Tasks</title>
+
+    <link rel="stylesheet" href="tasks.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>FitCheck</h2>
+        </div>
+        <nav class="side-nav">
+            <a href="index.html" class="nav-item">
+                <span>⌂</span>
+                <p>Dashboard</p>
+            </a>
+            <a href="tasks.html" class="nav-item active">
+                <span>✓</span>
+                <p>Tasks</p>
+            </a>
+            <a href="habits.html" class="nav-item">
+                <span>♡</span>
+                <p>Habits</p>
+            </a>
+            <a href="water.html" class="nav-item">
+                <span>💧</span>
+                <p>Water</p>
+            </a>
+            <a href="sleep.html" class="nav-item">
+                <span>☾</span>
+                <p>Sleep</p>
+            </a>
+            <a href="quotes.html" class="nav-item">
+                <span>✦</span>
+                <p>Quotes</p>
+            </a>
+            <a href="summary.html" class="nav-item">
+                <span>▣</span>
+                <p>Summary</p>
+            </a>
+            <a href="timer.html" class="nav-item">
+                <span>⏱</span>
+                <p>Timer</p>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <p class="small-heading">STAY ORGANIZED</p>
+            <h1>Task Manager</h1>
+            <p>Add, complete and manage your daily tasks.</p>
+        </header>
+        <section class="add-task-card">
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Write a new task...">
+            <button id="addTaskButton">
+                + Add Task
+            </button>
+        </section>
+        <section class="task-board">
+            <div class="task-column">
+                <div class="column-heading">
+                    <h2>Pending</h2>
+                    <span id="pendingCount">0</span>
+                </div>
+                <div id="pendingTasks" class="task-list">
+                </div>
+            </div>
+            <div class="task-column">
+                <div class="column-heading">
+                    <h2>Completed</h2>
+                    <span id="completedCount">0</span>
+                </div>
+                <div id="completedTasks" class="task-list">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
