@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitCheck - Habits</title>
+
+    <link rel="stylesheet" href="habits.css">
+</head>
+
+<body>
+
+    <!-- sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-mark">💪</div>
+            <h2>FitCheck</h2>
+        </div>
+
+        <nav class="side-nav">
+            <a class="sidebar-link" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+            <a class="sidebar-link" href="tasks.html"><span class="icon">✅</span> Tasks</a>
+            <a class="sidebar-link" href="habits.html"><span class="icon">📅</span> Habits</a>
+            <a class="sidebar-link" href="water.html"><span class="icon">💧</span> Water</a>
+            <a class="sidebar-link" href="sleep.html"><span class="icon">🌙</span> Sleep</a>
+            <a class="sidebar-link" href="timer.html"><span class="icon">⏱️</span> Timer</a>
+            <a class="sidebar-link" href="quotes.html"><span class="icon">💬</span> Saved Quotes</a>
+            <a class="sidebar-link" href="summary.html"><span class="icon">📊</span> Weekly Summary</a>
+        </nav>
+    </aside>
+
+
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="small-heading">BUILD CONSISTENCY</p>
+                <h1>Habit Tracker</h1>
+                <p class="small-heading">Track your habits every day.</p>
+            </div>
+            <h2 id="currentMonth"></h2>
+        </header>
+        <section class="add-habit-card">
+            <input
+                type="text"
+                id="habitInput"
+                placeholder="Enter a new habit..."
+            >
+            <button id="addHabitButton">
+                + Add Habit
+            </button>
+        </section>
+        <section class="habit-card">
+            <div class="table-wrapper">
+                <table id="habitTable">
+                    <thead>
+                        <tr id="habitHeader">
+                            <th>Habit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="habitBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="weekly-habit-card">
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">THIS WEEK</p>
+                    <h2>Habit Progress</h2>
+                </div>
+            </div>
+            <div id="weeklyHabitProgress">
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

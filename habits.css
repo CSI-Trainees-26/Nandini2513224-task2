@@ -103,7 +103,6 @@ button {
     background-color: #5245C3;
 }
 
-
 /* MAIN */
 
 .main-content {
@@ -112,7 +111,11 @@ button {
 }
 
 .page-header {
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
 }
 
 .small-heading {
@@ -125,13 +128,24 @@ button {
 
 .page-header h1 {
     font-size: 34px;
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
 
-/* ADD TASK */
 
-.add-task-card {
-    background-color: #0c2680;
+#currentMonth {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(0, 18, 79, 0.07);
+}
+
+
+/* ADD HABIT */
+
+.add-habit-card {
+    background-color:#0c2680;
+
     padding: 20px;
 
     border-radius: 15px;
@@ -139,27 +153,24 @@ button {
     display: flex;
     gap: 15px;
 
-    margin-bottom: 30px;
-
-    box-shadow: 0 5px 20px rgba(0, 18, 79, 0.07);
+    margin-bottom: 25px;
 }
 
-.add-task-card input {
+.add-habit-card input {
     flex: 1;
 
     padding: 13px;
 
-    border: 1px solid  #041a63;
-    border-radius: 8px;
+    border: 1px solid #041a63;
 
-    font-size: 15px;
+    border-radius: 8px;
 }
 
-.add-task-card button {
+.add-habit-card button {
     border: none;
 
     background-color: #5245C3;
-    color: white;
+    color:white;
 
     padding: 0 20px;
 
@@ -169,100 +180,125 @@ button {
 }
 
 
-/* TASK BOARD */
+/* TABLE */
 
-.task-board {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
-.task-column {
-    background-color:#0c2680;
-
-    border-radius: 18px;
+.habit-card,
+.weekly-habit-card {
+    background-color: darkblue;
 
     padding: 20px;
 
-    min-height: 450px;
+    border-radius: 18px;
+
+    margin-bottom: 25px;
 
     box-shadow: 0 5px 20px rgba(0, 18, 79, 0.07);
 }
 
-.column-heading {
-    display: flex;
-    justify-content: space-between;
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
 
+table {
+    border-collapse: collapse;
+    width: max-content;
+    min-width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+
+    min-width: 38px;
+    height: 38px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+th:first-child,
+td:first-child {
+    min-width: 180px;
+    text-align: left;
+    padding-left: 12px;
+
+    position: sticky;
+    left: 0;
+    
+    background-color: white;
+}
+
+th {
+    background-color: #00124F;
+    color:#5245C3 ;
+}
+
+.habit-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.habit-name button {
+    border: none;
+    background: transparent;
+    color: #b33;
+    cursor: pointer;
+}
+
+.habit-box {
+    cursor: pointer;
+}
+
+.habit-box.done {
+    background-color: #6958D8;
+    color:#0c2680;
+}
+
+.habit-box:hover {
+    background-color: #5245C3;
+    color: white;
+}
+
+
+/* WEEKLY PROGRESS */
+
+.section-heading {
     margin-bottom: 20px;
 }
 
-.column-heading span {
+.weekly-habit-row {
+    margin-bottom: 20px;
+}
+
+.weekly-habit-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.weekly-bar {
+    height: 10px;
+
+    background-color: #e8e6f8;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.weekly-bar div {
+    height: 100%;
     background-color: #6958D8;
-    color: white;
-
-    width: 28px;
-    height: 28px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* TASK */
-
-.task-list {
-    min-height: 350px;
-}
-
-.task-item {
-    background-color: #f5f4ff;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    margin-bottom: 12px;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    cursor: grab;
-}
-
-.task-item p {
-    flex: 1;
-}
-
-.task-item.completed p {
-    text-decoration: line-through;
-    color: #888;
-}
-
-.task-item button {
-    border: none;
-    background: transparent;
-
-    cursor: pointer;
-
-    font-size: 17px;
-}
-
-.edit-button {
-    color: #5245C3;
-}
-
-.delete-button {
-    color: #b33;
 }
 
 
 /* RESPONSIVE */
 
 @media (max-width: 800px) {
+
     .sidebar {
         width: 80px;
         align-items: center;
@@ -279,25 +315,26 @@ button {
     .nav-item {
         justify-content: center;
     }
-
     .main-content {
         margin-left: 80px;
         padding: 20px;
-    }
-
-    .task-board {
-        grid-template-columns: 1fr;
     }
 
 }
 
 @media (max-width: 600px) {
 
-    .add-task-card {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .add-habit-card {
         flex-direction: column;
     }
 
-    .add-task-card button {
+    .add-habit-card button {
         padding: 12px;
     }
 
