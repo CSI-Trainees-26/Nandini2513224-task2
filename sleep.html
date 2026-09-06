@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitCheck - Sleep</title>
+    <link rel="stylesheet" href="sleep.css">
+</head>
+<body>
+    <!-- sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-mark">💪</div>
+            <h2>FitCheck</h2>
+        </div>
+
+        <nav class="side-nav">
+            <a class="sidebar-link" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+            <a class="sidebar-link" href="tasks.html"><span class="icon">✅</span> Tasks</a>
+            <a class="sidebar-link" href="habits.html"><span class="icon">📅</span> Habits</a>
+            <a class="sidebar-link" href="water.html"><span class="icon">💧</span> Water</a>
+            <a class="sidebar-link" href="sleep.html"><span class="icon">🌙</span> Sleep</a>
+            <a class="sidebar-link" href="timer.html"><span class="icon">⏱️</span> Timer</a>
+            <a class="sidebar-link" href="quotes.html"><span class="icon">💬</span> Saved Quotes</a>
+            <a class="sidebar-link" href="summary.html"><span class="icon">📊</span> Weekly Summary</a>
+        </nav>
+    </aside>
+    
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="small-heading">REST & RECOVER</p>
+                <h1>Sleep Tracker</h1>
+                <p>Track your sleep and maintain a healthy schedule.</p>
+            </div>
+        </header>
+        <section class="sleep-top">
+            <div class="sleep-card goal">
+                <p class="small-heading">YOUR GOAL</p>
+                <h2>
+                    <span id="sleepGoalDisplay">8</span> hours
+                </h2>
+                <input
+                    type="number"
+                    id="sleepGoalInput"
+                    min="1"
+                    max="24"
+                    placeholder="8">
+                <button id="saveSleepGoal">
+                    Save Goal
+                </button>
+            </div>
+            <div class="sleep-card tracker">
+                <p class="small-heading">SLEEP TRACKER</p>
+                <h2 id="sleepStatus">
+                    Ready to sleep?
+                </h2>
+                <p id="sleepStartTime">
+                    No active sleep session.
+                </p>
+                <h3 id="sleepLiveTimer">
+                    00:00:00
+                </h3>
+                <div class="sleep-buttons">
+                    <button id="startSleep">
+                        Start Sleep
+                    </button>
+                    <button id="stopSleep">
+                        Stop Sleep
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="sleep-history-card">
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">SLEEP HISTORY</p>
+                    <h2>Recent Sleep</h2>
+                </div>
+            </div>
+            <div id="sleepChart" class="sleep-chart">
+            </div>
+        </section>
+        <section class="sleep-record-card">
+            <h2>Sleep Records</h2>
+            <div id="sleepRecords">
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

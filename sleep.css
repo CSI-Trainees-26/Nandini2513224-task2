@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color:aliceblue;
+    background-image: url("image.png");
+    background-size: cover;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #041a63;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    z-index: 100;
+    border-right: 1px solid #0c2680;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    font-size: 14.5px;
+    color: #aab0d9;
+    text-decoration: none;
+}
+.sidebar-link:hover {
+  background-color: #0c2680;
+  color: #f4f5fb;
+}
+.icon {
+  font-size: 17px;
+  width: 20px;
+  text-align: center;
+}
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+    font: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.logo h2 {
+    font-size: 27px;
+    letter-spacing: 1px;
+    font: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+}
+
+.nav-item span {
+    width: 25px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.nav-item p {
+    font-size: 15px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background-color: #5245C3;
+}
+
+.main-content {
+    margin-left: 230px;
+    padding: 40px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.small-heading {
+    color:aliceblue;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.page-header h1 {
+    font-size: 34px;
+    margin-bottom: 7px;
+}
+
+/* TOP CARDS */
+
+.sleep-top {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.sleep-card,
+.sleep-history-card,
+.sleep-record-card {
+    background-color: #0c2680;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 18, 79, 0.07);
+}
+
+.goal h2 {
+    font-size: 35px;
+    margin: 20px 0;
+}
+
+.goal input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #041a63;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.goal button {
+    border: none;
+    background-color: #5245C3;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+/* TRACKER */
+
+.tracker {
+    text-align: center;
+}
+
+.tracker h2 {
+    margin: 15px 0 8px;
+}
+
+
+#sleepLiveTimer {
+    font-size: 45px;
+    margin: 25px 0;
+    color: #5245C3;
+}
+
+.sleep-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.sleep-buttons button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#startSleep {
+    background-color: #5245C3;
+    color: white;
+}
+
+#stopSleep {
+    background-color: #eee;
+    color: #00124F;
+}
+
+
+/* CHART */
+
+.sleep-history-card {
+    margin-bottom: 25px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.sleep-chart {
+    min-height: 220px;
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+}
+
+.sleep-column {
+    flex: 1;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sleep-bar {
+    width: 70%;
+    background-color: #6958D8;
+    border-radius: 6px 6px 0 0;
+    min-height: 5px;
+}
+
+.sleep-column p {
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+
+/* RECORDS */
+
+.sleep-record-card h2 {
+    margin-bottom: 20px;
+}
+
+.sleep-record {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #f5f4ff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.good-sleep {
+    color: #5245C3;
+    font-weight: bold;
+}
+
+.short-sleep {
+    color: #b33;
+    font-weight: bold;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: 80px;
+        align-items: center;
+    }
+    .sidebar-link {
+        font-size: 0;
+    }
+    .logo h2 {
+        font-size: 15px;
+    }
+    .nav-item p {
+        display: none;
+    }
+    .nav-item {
+        justify-content: center;
+    }
+    .main-content {
+        margin-left: 80px;
+        padding: 20px;
+    }
+    .sleep-top {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .sleep-buttons {
+        flex-direction: column;
+    }
+}
