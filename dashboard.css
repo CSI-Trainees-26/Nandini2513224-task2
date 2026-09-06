@@ -105,6 +105,18 @@ button {
 
 /* the main thing */
 
+.page-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color:aliceblue;
+}
+
+.page-header p {
+  color:#aab0d9;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
 .header-clock {
   background-color: #041a63;
   border: 1px solid #0c2680;
