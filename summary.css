@@ -102,6 +102,7 @@ button {
 .nav-item.active {
     background-color: #5245C3;
 }
+
 .main-content {
     margin-left: 230px;
     padding: 40px;
@@ -164,6 +165,7 @@ button {
 }
 .summary-box h2 {
     margin-bottom: 20px;
+    color:#5245C3
 }
 
 
@@ -187,7 +189,6 @@ button {
 }
 
 .summary-box > p:last-child {
-    color: #777;
     line-height: 1.5;
 }
 
@@ -221,7 +222,7 @@ button {
 /* NOTE */
 
 .summary-note {
-    color: white;
+    color:white;
     line-height: 1.6;
 }
 

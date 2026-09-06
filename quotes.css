@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color:aliceblue;
+    background-image: url("image.png");
+    background-size: cover;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+/* sidebar */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #041a63;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    z-index: 100;
+    border-right: 1px solid #0c2680;
+}
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    font-size: 14.5px;
+    color: #aab0d9;
+    text-decoration: none;
+}
+.sidebar-link:hover {
+  background-color: #0c2680;
+  color: #f4f5fb;
+}
+.icon {
+  font-size: 17px;
+  width: 20px;
+  text-align: center;
+}
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+    font: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.logo h2 {
+    font-size: 27px;
+    letter-spacing: 1px;
+    font: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+}
+
+.nav-item span {
+    width: 25px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.nav-item p {
+    font-size: 15px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background-color: #5245C3;
+}
+
+.main-content {
+    margin-left: 230px;
+    padding: 40px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.small-heading {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.page-header h1 {
+    font-size: 34px;
+    margin-bottom: 7px;
+}
+
+/* QUOTE */
+.quote-main-card {
+    background-color: #00124F;
+    color: white;
+    border-radius: 22px;
+    padding: 55px;
+    text-align: center;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.quote-mark {
+    font-size: 70px;
+    color: #6958D8;
+    height: 60px;
+}
+
+.quote-main-card h2 {
+    max-width: 800px;
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+#quoteAuthor {
+    color: #bdb7ff;
+    font-size: 17px;
+}
+
+/* BUTTONS */
+.quote-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+
+.quote-actions button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#quoteButton {
+    background-color: #5245C3;
+    color: white;
+}
+
+#saveQuoteButton {
+    background-color: white;
+    color: #00124F;
+}
+
+
+/* SAVED */
+.saved-section {
+    background-color:#0c2680;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 18, 79, 0.07);
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.saved-quote {
+    padding: 20px;
+    background-color:#0c2680;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.saved-quote p:first-child {
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.saved-quote p:nth-child(2) {
+    color: #6958D8;
+}
+
+.saved-quote button {
+    margin-top: 10px;
+    border: none;
+    background-color: transparent;
+    color: #b33;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+    .sidebar {
+        width: 80px;
+        align-items: center;
+    }
+    .sidebar-link {
+        font-size: 0;
+    }
+    .logo h2 {
+        font-size: 15px;
+    }
+    .nav-item p {
+        display: none;
+    }
+    .nav-item {
+        justify-content: center;
+    }
+    .nav-item {
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 80px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .quote-main-card {
+        padding: 30px 20px;
+    }
+    .quote-main-card h2 {
+        font-size: 21px;
+    }
+    .quote-actions {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitCheck - Quotes</title>
+    <link rel="stylesheet" href="quotes.css">
+</head>
+<body>
+    <!-- sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-mark">💪</div>
+            <h2>FitCheck</h2>
+        </div>
+
+        <nav class="side-nav">
+            <a class="sidebar-link" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+            <a class="sidebar-link" href="tasks.html"><span class="icon">✅</span> Tasks</a>
+            <a class="sidebar-link" href="habits.html"><span class="icon">📅</span> Habits</a>
+            <a class="sidebar-link" href="water.html"><span class="icon">💧</span> Water</a>
+            <a class="sidebar-link" href="sleep.html"><span class="icon">🌙</span> Sleep</a>
+            <a class="sidebar-link" href="timer.html"><span class="icon">⏱️</span> Timer</a>
+            <a class="sidebar-link" href="quotes.html"><span class="icon">💬</span> Saved Quotes</a>
+            <a class="sidebar-link" href="summary.html"><span class="icon">📊</span> Weekly Summary</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <p class="small-heading">STAY MOTIVATED</p>
+            <h1>Motivational Quotes</h1>
+            <p>Find something that keeps you moving forward.</p>
+        </header>
+        <section class="quote-main-card">
+            <p class="quote-mark">“</p>
+            <h2 id="quoteText">
+                Loading quote...
+            </h2>
+            <p id="quoteAuthor"></p>
+            <div class="quote-actions">
+                <button id="quoteButton">
+                    Get New Quote
+                </button>
+                <button id="saveQuoteButton">
+                    ♡ Save Quote
+                </button>
+            </div>
+        </section>
+        <section class="saved-section">
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">YOUR COLLECTION</p>
+                    <h2>Saved Quotes</h2>
+                </div>
+            </div>
+            <div id="savedQuotes">
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
