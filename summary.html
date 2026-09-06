@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitCheck - Summary</title>
+
+    <link rel="stylesheet" href="summary.css">
+
+</head>
+
+<body>
+
+    <!-- sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-mark">💪</div>
+            <h2>FitCheck</h2>
+        </div>
+
+        <nav class="side-nav">
+            <a class="sidebar-link" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+            <a class="sidebar-link" href="tasks.html"><span class="icon">✅</span> Tasks</a>
+            <a class="sidebar-link" href="habits.html"><span class="icon">📅</span> Habits</a>
+            <a class="sidebar-link" href="water.html"><span class="icon">💧</span> Water</a>
+            <a class="sidebar-link" href="sleep.html"><span class="icon">🌙</span> Sleep</a>
+            <a class="sidebar-link" href="timer.html"><span class="icon">⏱️</span> Timer</a>
+            <a class="sidebar-link" href="quotes.html"><span class="icon">💬</span> Saved Quotes</a>
+            <a class="sidebar-link" href="summary.html"><span class="icon">📊</span> Weekly Summary</a>
+        </nav>
+    </aside>
+    
+    <main class="main-content">
+        <header class="page-header">
+            <p class="small-heading">YOUR PROGRESS</p>
+            <h1>Weekly Summary</h1>
+            <p>See how your week is going.</p>
+        </header>
+        <section class="summary-cards">
+            <div class="summary-card">
+                <p>Tasks</p>
+                <h2 id="summaryTasks">0%</h2>
+                <span>Completed</span>
+            </div>
+            <div class="summary-card">
+                <p>Habits</p>
+                <h2 id="summaryHabits">0%</h2>
+                <span>Completed</span>
+            </div>
+            <div class="summary-card">
+                <p>Water</p>
+                <h2 id="summaryWater">0%</h2>
+                <span>Daily Goal</span>
+            </div>
+            <div class="summary-card">
+                <p>Sleep</p>
+                <h2 id="summarySleep">0%</h2>
+                <span>Goal Met</span>
+            </div>
+        </section>
+        <section class="summary-content">
+            <div class="summary-box">
+                <p class="small-heading">WEEKLY OVERVIEW</p>
+                <h2>Overall Progress</h2>
+                <div class="overall-circle">
+                    <span id="overallProgress">0%</span>
+                </div>
+                <p id="summaryMessage">
+                    Start tracking your activities to see your progress.
+                </p>
+            </div>
+            <div class="summary-box">
+                <p class="small-heading">BREAKDOWN</p>
+                <h2>Activities</h2>
+                <div class="summary-row">
+                    <span>Tasks</span>
+                    <div class="summary-line">
+                        <div id="summaryTaskBar"></div>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <span>Habits</span>
+                    <div class="summary-line">
+                        <div id="summaryHabitBar"></div>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <span>Water</span>
+                    <div class="summary-line">
+                        <div id="summaryWaterBar"></div>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <span>Sleep</span>
+                    <div class="summary-line">
+                        <div id="summarySleepBar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="summary-box">
+            <p class="small-heading">FITCHECK NOTE</p>
+            <h2>Consistency matters more than perfection.</h2>
+            <p class="summary-note">
+                Use your weekly summary to understand your routine,
+                identify areas that need improvement and keep building
+                better habits.
+            </p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
