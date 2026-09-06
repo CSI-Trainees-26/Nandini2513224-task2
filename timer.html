@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitCheck - Timer</title>
+
+    <link rel="stylesheet" href="timer.css">
+
+</head>
+
+<body>
+
+   <!-- sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-mark">💪</div>
+            <h2>FitCheck</h2>
+        </div>
+
+        <nav class="side-nav">
+            <a class="sidebar-link" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+            <a class="sidebar-link" href="tasks.html"><span class="icon">✅</span> Tasks</a>
+            <a class="sidebar-link" href="habits.html"><span class="icon">📅</span> Habits</a>
+            <a class="sidebar-link" href="water.html"><span class="icon">💧</span> Water</a>
+            <a class="sidebar-link" href="sleep.html"><span class="icon">🌙</span> Sleep</a>
+            <a class="sidebar-link" href="timer.html"><span class="icon">⏱️</span> Timer</a>
+            <a class="sidebar-link" href="quotes.html"><span class="icon">💬</span> Saved Quotes</a>
+            <a class="sidebar-link" href="summary.html"><span class="icon">📊</span> Weekly Summary</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <p class="small-heading">FOCUS MODE</p>
+            <h1>Focus Timer</h1>
+            <p>Set a duration and concentrate on your work.</p>
+        </header>
+        <section class="timer-card">
+            <div class="timer-display" id="timerDisplay">
+                25:00
+            </div>
+            <div class="duration-input">
+                <label for="timerMinutes">
+                    Duration in minutes
+                </label>
+                <input
+                    type="number"
+                    id="timerMinutes"
+                    value="25"
+                    min="1"
+                >
+            </div>
+            <div class="timer-buttons">
+                <button id="startTimer">
+                    Start
+                </button>
+                <button id="pauseTimer">
+                    Pause
+                </button>
+                <button id="stopTimer">
+                    Stop
+                </button>
+                <button id="resetTimer">
+                    Reset
+                </button>
+            </div>
+            <p id="timerMessage">
+                Ready to focus?
+            </p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
