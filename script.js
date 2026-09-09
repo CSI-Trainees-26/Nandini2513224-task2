@@ -412,3 +412,373 @@ createHabitTable();
 showWeeklyHabitProgress();
 
 // water tracker part
+let waterGoal =Number(localStorage.getItem("fitcheckWaterGoal")) || 2500;
+
+function getWaterData() {
+    return JSON.parse(localStorage.getItem("fitcheckWaterData")) || {};
+}
+function saveWaterData(data) {
+    localStorage.setItem("fitcheckWaterData",JSON.stringify(data));
+}
+
+function getTodayWater() {
+    let data = getWaterData();
+    let today = getTodayKey();
+    if (!data[today]) {
+        data[today] = 0;
+    }
+    return data[today];
+}
+
+function updateWaterDisplay() {
+    let waterAmount =
+        document.getElementById("waterAmount");
+    let waterGoalDisplay =
+        document.getElementById("waterGoalDisplay");
+    let waterProgress =
+        document.getElementById("waterProgress");
+    let waterPercentage =
+        document.getElementById("waterPercentage");
+    if (!waterAmount) {
+        return;
+    }
+    let amount = getTodayWater();
+    waterAmount.textContent = amount;
+    waterGoalDisplay.textContent = waterGoal;
+    let percentage =
+        Math.round((amount / waterGoal) * 100);
+    if (percentage > 100) {
+        percentage = 100;
+    }
+    waterProgress.style.width =
+        percentage + "%";
+    waterPercentage.textContent =
+        percentage + "%";
+}
+
+let waterButtons=document.querySelectorAll("[data-water]");
+waterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        let change =Number(button.getAttribute("data-water"));
+        let data = getWaterData();
+        let today = getTodayKey();
+        if (!data[today]) {
+            data[today] = 0;
+        }
+        data[today] = data[today] + change;
+        if (data[today] < 0) {
+            data[today] = 0;
+        }
+        saveWaterData(data);
+        updateWaterDisplay();
+        createWaterCharts();
+    });
+});
+
+let saveWaterGoal=document.getElementById("saveWaterGoal");
+if (saveWaterGoal) {
+    saveWaterGoal.addEventListener("click", function () {
+        let input =
+            document.getElementById("waterGoalInput");
+        let newGoal =
+            Number(input.value);
+        if (newGoal <= 0) {
+            alert("Please enter a valid goal.");
+            return;
+        }
+        waterGoal = newGoal;
+        localStorage.setItem(
+            "fitcheckWaterGoal",
+            waterGoal
+        );
+        input.value = "";
+        updateWaterDisplay();
+    });
+}
+
+function createWaterCharts() {
+    let weeklyChart =
+        document.getElementById("weeklyWaterChart");
+    let monthlyChart =
+        document.getElementById("monthlyWaterChart");
+    if (!weeklyChart || !monthlyChart) {
+        return;
+    }
+    weeklyChart.innerHTML = "";
+    monthlyChart.innerHTML = "";
+    let data = getWaterData();
+    let today = new Date();
+    for (let i = 6; i >= 0; i--) {
+        let date = new Date();
+        date.setDate(today.getDate() - i);
+        let key =date.getFullYear() + "+" +String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
+        let amount = data[key] || 0;
+        let column =document.createElement("div");
+        column.className = "chart-column";
+        let bar =document.createElement("div");
+        bar.className = "chart-bar";
+        let height =(amount / waterGoal) * 100;
+        if (height > 100) {
+            height = 100;
+        }
+
+        bar.style.height = height + "%";
+        let label =document.createElement("p");
+        label.textContent = date.getDate();
+        column.appendChild(bar);
+        column.appendChild(label);
+        weeklyChart.appendChild(column);
+    }
+
+    for (let i = 29; i >= 0; i--) {
+        let date = new Date();
+        date.setDate(today.getDate() - i);
+        let key =date.getFullYear() +"-" +String(date.getMonth() + 1).padStart(2, "0") +"-" +String(date.getDate()).padStart(2, "0");
+        let amount = data[key] || 0;
+        let column =document.createElement("div");
+        column.className = "chart-column";
+        let bar =document.createElement("div");
+        bar.className = "chart-bar";
+
+        let height =(amount / waterGoal) * 100;
+
+        if (height > 100) {
+            height = 100;
+        }
+
+        bar.style.height = height + "%";
+
+        let label =document.createElement("p");
+        label.textContent = date.getDate();
+
+        column.appendChild(bar);
+        column.appendChild(label);
+        monthlyChart.appendChild(column);
+    }
+}
+updateWaterDisplay();
+createWaterCharts();
+
+
+// sleep tracker part
+
+let sleepGoal =Number(localStorage.getItem("fitcheckSleepGoal")) || 8;
+let sleepRecords =JSON.parse(localStorage.getItem("fitcheckSleepRecords")) || [];
+let activeSleep =localStorage.getItem("fitcheckActiveSleep");
+let sleepInterval;
+function saveSleepRecords() {
+    localStorage.setItem("fitcheckSleepRecords",JSON.stringify(sleepRecords));
+}
+function formatSleepTime(milliseconds) {
+    let totalSeconds =
+        Math.floor(milliseconds / 1000);
+    let hours =
+        Math.floor(totalSeconds / 3600);
+    let minutes =
+        Math.floor((totalSeconds % 3600) / 60);
+    let seconds =
+        totalSeconds % 60;
+    return (String(hours).padStart(2, "0") +":" +String(minutes).padStart(2, "0") +":" +String(seconds).padStart(2, "0"));
+}
+function updateSleepTimer() {
+    let liveTimer =document.getElementById("sleepLiveTimer");
+    if (!liveTimer) {
+        return;
+    }
+    if (!activeSleep) {
+        liveTimer.textContent = "00:00:00";
+        return;
+    }
+    let startTime =Number(activeSleep);
+    let currentTime =Date.now();
+    let difference =currentTime - startTime;
+    liveTimer.textContent =formatSleepTime(difference);
+}
+function startSleep() {
+    if (activeSleep) {
+        alert("Sleep tracking is already running.");
+        return;
+    }
+    activeSleep = Date.now().toString();
+    localStorage.setItem(
+        "fitcheckActiveSleep",
+        activeSleep
+    );
+    updateSleepStatus();
+}
+function stopSleep() {
+    if (!activeSleep) {
+        alert("Sleep tracking has not been started.");
+        return;
+    }
+    let startTime =
+        Number(activeSleep);
+    let endTime =
+        Date.now();
+    let duration =
+        endTime - startTime;
+    let today =
+        getTodayKey();
+    let sleepRecord = {
+        date: today,
+        start: startTime,
+        end: endTime,
+        duration: duration
+    };
+    sleepRecords.push(sleepRecord);
+    saveSleepRecords();
+    activeSleep = null;
+    localStorage.removeItem("fitcheckActiveSleep");
+    updateSleepStatus();
+    displaySleepRecords();
+    createSleepChart();
+}
+
+function updateSleepStatus() {
+    let status =document.getElementById("sleepStatus");
+    let startText =document.getElementById("sleepStartTime");
+    if (!status) {
+        return;
+    }
+
+    if (activeSleep) {
+        status.textContent ="Sleep tracking is active";
+        startText.textContent ="Sleep started at " +new Date(Number(activeSleep)).toLocaleTimeString();
+    } 
+    else {
+        status.textContent =
+            "Ready to sleep?";
+        startText.textContent =
+            "No active sleep session.";
+    }
+}
+let startSleepButton =
+    document.getElementById("startSleep");
+if (startSleepButton) {
+    startSleepButton.addEventListener("click",startSleep);
+}
+let stopSleepButton =
+    document.getElementById("stopSleep");
+
+if (stopSleepButton) {
+    stopSleepButton.addEventListener("click",stopSleep);
+}
+let saveSleepGoal =document.getElementById("saveSleepGoal");
+if (saveSleepGoal) {
+    saveSleepGoal.addEventListener("click", function () {
+        let input =document.getElementById("sleepGoalInput");
+        let newGoal =Number(input.value);
+        if (newGoal <= 0 || newGoal > 24) {
+            alert("Please enter a value between 1 and 24.");
+            return;
+        }
+        sleepGoal = newGoal;
+        localStorage.setItem("fitcheckSleepGoal",sleepGoal);
+        updateSleepGoalDisplay();
+    });
+}
+
+function updateSleepGoalDisplay() {
+    let goalDisplay =document.getElementById("sleepGoalDisplay");
+    if (goalDisplay) {
+        goalDisplay.textContent = sleepGoal;
+    }
+}
+
+function displaySleepRecords() {
+    let recordsArea =
+        document.getElementById("sleepRecords");
+    if (!recordsArea) {
+        return;
+    }
+    recordsArea.innerHTML = "";
+    if (sleepRecords.length === 0) {
+        recordsArea.innerHTML =
+            "<p>No sleep records yet.</p>";
+        return;
+    }
+    for (let i = sleepRecords.length - 1;i >= 0;i--) {
+        let record = sleepRecords[i];
+        let recordBox =
+            document.createElement("div");
+        recordBox.className =
+            "sleep-record";
+        let durationText =
+            formatSleepTime(record.duration);
+        let hours =
+            record.duration / (1000 * 60 * 60);
+        let resultClass = "";
+        if (hours >= sleepGoal) {
+            resultClass = "good-sleep";
+        } 
+        else {
+            resultClass = "short-sleep";
+        }
+        recordBox.innerHTML = `
+            <span>${record.date}</span>
+            <span class="${resultClass}">
+                ${durationText}
+            </span>
+        `;
+        recordsArea.appendChild(recordBox);
+    }
+}
+function createSleepChart() {
+    let chart =document.getElementById("sleepChart");
+    if (!chart) {
+        return;
+    }
+    chart.innerHTML = "";
+    let today = new Date();
+    for (let i = 6; i >= 0; i--) {
+        let date = new Date();
+        date.setDate(today.getDate() - i);
+
+        let key =date.getFullYear() +"-" +String(date.getMonth() + 1).padStart(2, "0") +"-" +String(date.getDate()).padStart(2, "0");
+        let record = null;
+
+        for (let j = 0; j < sleepRecords.length; j++) {
+            if (sleepRecords[j].date === key) {
+                record = sleepRecords[j];
+            }
+        }
+        let hours = 0;
+        if (record) {
+            hours =record.duration /(1000 * 60 * 60);
+        }
+
+        let column =
+            document.createElement("div");
+        column.className =
+            "sleep-column";
+        let bar =
+            document.createElement("div");
+        bar.className =
+            "sleep-bar";
+        let height =
+            (hours / 12) * 100;
+        if (height > 100) {
+            height = 100;
+        }
+        bar.style.height =
+            height + "%";
+        let label =
+            document.createElement("p");
+        label.textContent =
+            date.getDate();
+        column.appendChild(bar);
+        column.appendChild(label);
+        chart.appendChild(column);
+    }
+}
+updateSleepGoalDisplay();
+updateSleepStatus();
+displaySleepRecords();
+createSleepChart();
+if (activeSleep) {
+    updateSleepTimer();
+    sleepInterval =setInterval(updateSleepTimer, 1000);
+}
+
+
+
