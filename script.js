@@ -74,82 +74,84 @@ function updateclock() {
 updateclock();
 setInterval(updateclock, 1000);
 
+
 // tasks part
-let tasks= JSON.parse(localStorage.getItem("fitcheckTasks")) || [];
+// TASKS PART
 
+let tasks = JSON.parse(localStorage.getItem("fitcheckTasks")) || [];
+
+
+// SAVE TASKS
 function savetasks() {
-    localStorage.setItem("fitcheckTasks",JSON.stringify(tasks));
+    localStorage.setItem("fitcheckTasks", JSON.stringify(tasks));
 }
-function displaytasks() {
-    let pendingtasks=document.getElementById("pendingtasks");
-    let completedtasks=document.getElementById("completedtasks");
 
+
+// DISPLAY TASKS
+function displaytasks() {
+
+    let pendingtasks = document.getElementById("pendingTasks");
+    let completedtasks = document.getElementById("completedTasks");
     if (!pendingtasks || !completedtasks) {
         return;
     }
-
-    pendingtasks.innerHTML="";
-    completedtasks.innerHTML="";
-
-    let pendingCount=0;
-    let completedCount=0;
-
-    for (let i=0; i<tasks.length;i++) {
-        let task=task[i];
-        let taskBox= document.createElement("div");
-        taskBox.className="task-item";
+    pendingtasks.innerHTML = "";
+    completedtasks.innerHTML = "";
+    let pendingCount = 0;
+    let completedCount = 0;
+    for (let i = 0; i < tasks.length; i++) {
+        let task = tasks[i];
+        let taskBox = document.createElement("div");
+        taskBox.className = "task-item";
         taskBox.setAttribute("draggable", "true");
-        taskBox.setAttribute("data-index", i);
+        taskBox.setAttribute("data-drag-index", i);
+
         if (task.completed) {
             taskBox.classList.add("completed");
         }
-
-        let checkBox= document.createElement("input");
+        let checkBox = document.createElement("input");
         checkBox.type = "checkbox";
-        checkBox.checked=task.completed;
-        checkBox.addEventListener("change",function() {
-            tasks[i].completed=checkBox.checked;
+        checkBox.checked = task.completed;
+        checkBox.addEventListener("change", function () {
+            tasks[i].completed = checkBox.checked;
             savetasks();
             displaytasks();
         });
-
-        let taskText=document.createElement("p");
-        taskText.textContent=task.text;
-        let editButton= document.createElement("button");
-        editButton.textContent="✎";
-        editButton.className="edit-button";
-        editButton.addEventListener("click",function(){
-            let newText= prompt("edit your task:", task.text);
+        let taskText = document.createElement("p");
+        taskText.textContent = task.text;
+        let editButton = document.createElement("button");
+        editButton.textContent = "✎";
+        editButton.className = "edit-button";
+        editButton.addEventListener("click", function () {
+            let newText = prompt("Edit your task:", task.text);
             if (newText !== null && newText.trim() !== "") {
-                tasks[i].text=newText.trim();
+                tasks[i].text = newText.trim();
                 savetasks();
                 displaytasks();
             }
         });
 
-        let deletebutton=document.createElement("button");
-        deletebutton.textContent="x";
-        deletebutton.className="delete-button";
-        deletebutton.addEventListener("click",function() {
-            tasks.splice(i,1);
+        let deletebutton = document.createElement("button");
+        deletebutton.textContent = "x";
+        deletebutton.className = "delete-button";
+        deletebutton.addEventListener("click", function () {
+            tasks.splice(i, 1);
             savetasks();
             displaytasks();
         });
-
         taskBox.appendChild(checkBox);
         taskBox.appendChild(taskText);
         taskBox.appendChild(editButton);
-        taskBox.appendChild(deleteButton);
-        
-        taskBox.addEventListener("dragstart",function() {
-            textBox.classList.add("dragging");
-            textBox.setAttribute("data-drag-index",i);
-        });
-        taskBox.addEventListener("dragend",function() {
-            taskBox.classList.remove("dragging");
+        taskBox.appendChild(deletebutton);
+        taskBox.addEventListener("dragstart", function () {
+            taskBox.classList.add("dragging");
+            taskBox.setAttribute("data-drag-index", i);
         });
 
-        if(task.completed) {
+        taskBox.addEventListener("dragend", function () {
+            taskBox.classList.remove("dragging");
+        });
+        if (task.completed) {
             completedtasks.appendChild(taskBox);
             completedCount++;
         }
@@ -157,101 +159,66 @@ function displaytasks() {
             pendingtasks.appendChild(taskBox);
             pendingCount++;
         }
-
-        document.getElementById("pendingCount").textContent=pendingCount;
-        document.getElementById("completedCount").textContent=completedCount;
-
-        let addTaskButton = document.getElementById("addTaskButton");
-        if (addTaskButton) {
-            addTaskButton.addEventListener("click", function () {
-                let taskInput = document.getElementById("taskInput");
-                let taskText = taskInput.value.trim();
-                if (taskText === "") {
-                    alert("Please enter a task.");
-                    return;
-                }
-                let newTask = {
-                    text: taskText,
-                    completed: false
-                };
-
-                tasks.push(newTask);
-                savetasks();
-                taskInput.value = "";
-                displaytasks();
-        });
-        
-        let pendingTaskArea =document.getElementById("pendingTasks");
-        let completedTaskArea =document.getElementById("completedTasks");
-        if (pendingTaskArea) {
-            pendingTaskArea.addEventListener("dragover",function(event) {
-                event.preventDefault();
-            });
-        pendingTaskArea.addEventListener("drop", function(event) {
-            event.preventDefault();
-            
-            let index =event.target.closest(".task-item")?.getAttribute("data-drag-index");
-            if (index !== null && index !== undefined) {
-                tasks[index].completed = false;
-                savetasks();
-                displaytasks();
-            }
-
-        });
-
     }
+    document.getElementById("pendingCount").textContent = pendingCount;
+    document.getElementById("completedCount").textContent = completedCount;
+}
 
-    if (completedTaskArea) {
-        completedTaskArea.addEventListener("dragover", function (event) {
-            event.preventDefault();
-        });
-        completedTaskArea.addEventListener("drop", function (event) {
-            event.preventDefault();
-            let index =event.target.closest(".task-item")?.getAttribute("data-drag-index");
-            if (index !== null && index !== undefined) {
-                tasks[index].completed = true;
-                savetasks();
-                displaytasks();
-            }
-        });
-    }
-    displaytasks();
+let addTaskButton = document.getElementById("addTaskButton");
+if (addTaskButton) {
+    addTaskButton.addEventListener("click", function () {
+        let taskInput = document.getElementById("taskInput");
+        let taskText = taskInput.value.trim();
+        if (taskText === "") {
+            alert("Please enter a task.");
+            return;
         }
-
-    let pendingTaskArea =document.getElementById("pendingTasks");
-    let completedTaskArea =document.getElementById("completedTasks");
-    if (pendingTaskArea) {
-        pendingTaskArea.addEventListener("dragover", function (event) {
-            event.preventDefault();
-        });
-
-        pendingTaskArea.addEventListener("drop", function (event) {
-            event.preventDefault();
-            let index =event.target.closest(".task-item")?.getAttribute("data-drag-index");
-            if (index !== null && index !== undefined) {
-                tasks[index].completed = false;
-                savetasks();
-                displaytasks();
-            }
-        });
-    }
-    if (completedTaskArea) {
-        completedTaskArea.addEventListener("dragover", function (event) {
-            event.preventDefault();
-        });
-        completedTaskArea.addEventListener("drop", function (event) {
-            event.preventDefault();
-            let index =event.target.closest(".task-item")?.getAttribute("data-drag-index");
-            if (index !== null && index !== undefined) {
-                tasks[index].completed = true;
-                savetasks();
-                displaytasks();
-            }
-        });
-    }
-    displaytasks();
+        let newTask = {
+            text: taskText,
+            completed: false
+        };
+        tasks.push(newTask);
+        savetasks();
+        taskInput.value = "";
+        displaytasks();
+    });
 }
+let pendingTaskArea = document.getElementById("pendingTasks");
+let completedTaskArea = document.getElementById("completedTasks");
+
+if (pendingTaskArea) {
+    pendingTaskArea.addEventListener("dragover", function (event) {
+        event.preventDefault();
+    });
+    pendingTaskArea.addEventListener("drop", function (event) {
+        event.preventDefault();
+        let index = event.target.closest(".task-item")?.getAttribute("data-drag-index");
+        if (index !== null && index !== undefined) {
+            tasks[index].completed = false;
+            savetasks();
+            displaytasks();
+        }
+    });
 }
+
+if (completedTaskArea) {
+    completedTaskArea.addEventListener("dragover", function (event) {
+        event.preventDefault();
+    });
+    completedTaskArea.addEventListener("drop", function (event) {
+        event.preventDefault();
+        let index = event.target.closest(".task-item")?.getAttribute("data-drag-index");
+        if (index !== null && index !== undefined) {
+            tasks[index].completed = true;
+            savetasks();
+            displaytasks();
+        }
+    });
+}
+
+
+// DISPLAY TASKS WHEN PAGE LOADS
+displaytasks();
 
 // habits part
 
@@ -918,3 +885,228 @@ displaySavedQuotes();
 
 // timer part
 
+let timerSeconds = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+
+function showTimer() {
+    let display =document.getElementById("timerDisplay");
+    if (!display) {
+        return;
+    }
+    let minutes =Math.floor(timerSeconds / 60);
+    let seconds =timerSeconds % 60;
+
+    display.textContent =String(minutes).padStart(2, "0") +":" +String(seconds).padStart(2, "0");
+}
+
+function startTimer() {
+    if (timerRunning) {
+        return;
+    }
+
+    let message =document.getElementById("timerMessage");
+    timerRunning = true;
+    if (message) {
+        message.textContent ="Focus mode is active.";
+    }
+
+    timerInterval =setInterval(function () {
+            if (timerSeconds > 0) {
+                timerSeconds--;
+                showTimer();
+            } 
+            else {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                timerFinished();
+            }
+        }, 1000);
+}
+function pauseTimer() {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    let message =document.getElementById("timerMessage");
+    if (message) {
+        message.textContent ="Timer paused.";
+    }
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerSeconds = 0;
+    showTimer();
+    let message =document.getElementById("timerMessage");
+    if (message) {
+        message.textContent ="Timer stopped.";
+    }
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    let input =document.getElementById("timerMinutes");
+    let minutes = 25;
+    if (input && Number(input.value) > 0) {
+        minutes =Number(input.value);
+    }
+    timerSeconds =minutes * 60;
+    showTimer();
+    let message =document.getElementById("timerMessage");
+    if (message) {
+        message.textContent ="Ready to focus?";
+    }
+}
+
+function timerFinished() {
+    let message =document.getElementById("timerMessage");
+    if (message) {
+        message.textContent ="Time is over! Great work.";
+    }
+    playAlarm();
+}
+
+function playAlarm() {
+    let audioContext =
+        new (window.AudioContext ||window.webkitAudioContext)();
+
+    let oscillator =audioContext.createOscillator();
+    let gain =audioContext.createGain();
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.frequency.value = 700;
+    oscillator.type = "sine";
+    oscillator.start();
+    gain.gain.setValueAtTime(0.5,audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01,audioContext.currentTime + 1);
+    oscillator.stop(audioContext.currentTime + 1);
+}
+
+let startTimerButton =document.getElementById("startTimer");
+if (startTimerButton) {
+    startTimerButton.addEventListener("click",function () {
+            let input =
+                document.getElementById("timerMinutes");
+            if (!timerRunning &&timerSeconds === 25 * 60 && input && Number(input.value) > 0) {
+                timerSeconds = Number(input.value) * 60;
+            }
+            startTimer();
+        }
+    );
+}
+let pauseTimerButton =document.getElementById("pauseTimer");
+if (pauseTimerButton) {
+    pauseTimerButton.addEventListener("click",pauseTimer);
+}
+
+let stopTimerButton =document.getElementById("stopTimer");
+
+if (stopTimerButton) {
+    stopTimerButton.addEventListener("click",stopTimer);
+}
+
+let resetTimerButton =document.getElementById("resetTimer");
+
+if (resetTimerButton) {
+    resetTimerButton.addEventListener("click",resetTimer);
+}
+showTimer();
+
+
+// overall dashboard pe display
+
+function updateDashboard() {
+
+// tasks
+    let taskProgress =
+        document.getElementById("taskProgress");
+    let taskBar =document.getElementById("taskBar");
+    if (taskProgress) {
+        let totalTasks =tasks.length;
+        let completedTasks = 0;
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i].completed) {
+                completedTasks++;
+            }
+        }
+        taskProgress.textContent =completedTasks + " / " + totalTasks;
+        let taskPercentage = 0;
+        if (totalTasks > 0) {
+            taskPercentage =Math.round((completedTasks / totalTasks) * 100);
+        }
+        if (taskBar) {
+            taskBar.style.width =taskPercentage + "%";
+        }
+    }
+
+// water
+    let dashboardWater =document.getElementById("dashboardWater");
+    let dashboardWaterGoal =document.getElementById("dashboardWaterGoal");
+    let waterBar = document.getElementById("waterBar");
+    if (dashboardWater) {
+        let amount =getTodayWater();
+        dashboardWater.textContent = amount + " ml";
+        dashboardWaterGoal.textContent ="Goal: " + waterGoal + " ml";
+        let waterPercentage = Math.round((amount / waterGoal) * 100);
+        if (waterPercentage > 100) {
+            waterPercentage = 100;
+        }
+        if (waterBar) {
+            waterBar.style.width =waterPercentage + "%";
+        }
+    }
+// habits
+    let dashboardHabits =
+        document.getElementById("dashboardHabits");
+    let habitBar =document.getElementById("habitBar");
+
+    if (dashboardHabits) {
+        let today =new Date().getDate();
+        let completed = 0;
+        for (let i = 0; i < habits.length; i++) {
+            if (habits[i].days && habits[i].days[today]) {
+                completed++;
+            }
+        }
+
+        let percentage = 0;
+        if (habits.length > 0) {
+            percentage =Math.round((completed / habits.length) * 100);
+        }
+        dashboardHabits.textContent =percentage + "%";
+        if (habitBar) {
+            habitBar.style.width =percentage + "%";
+        }
+    }
+
+// sleep
+    let dashboardSleep =document.getElementById("dashboardSleep");
+    let sleepBar =document.getElementById("sleepBar");
+
+    if (dashboardSleep) {
+        let today =getTodayKey();
+        let todaySleep = null;
+        for (let i = 0; i < sleepRecords.length; i++) {
+            if (sleepRecords[i].date === today) {
+                todaySleep =sleepRecords[i];
+            }
+        }
+        if (todaySleep) {
+            let hours =todaySleep.duration /(1000 * 60 * 60);
+            dashboardSleep.textContent =hours.toFixed(1) + " h";
+            let percentage =Math.round((hours / sleepGoal) * 100);
+            if (percentage > 100) {
+                percentage = 100;
+            }
+            if (sleepBar) {
+                sleepBar.style.width =percentage + "%";
+            }
+        } 
+        else {
+            dashboardSleep.textContent ="No record";
+        }
+    }
+}
+
+updateDashboard();
