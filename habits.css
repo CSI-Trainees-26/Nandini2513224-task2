@@ -133,7 +133,7 @@ button {
 
 
 #currentMonth {
-    background-color: white;
+    background-color:#aab0d9;
     padding: 15px 20px;
     border-radius: 12px;
 
@@ -209,7 +209,6 @@ table {
 th,
 td {
     border: 1px solid #ddd;
-
     min-width: 38px;
     height: 38px;
 
@@ -239,6 +238,7 @@ th {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color:#6958D8
 }
 
 .habit-name button {
