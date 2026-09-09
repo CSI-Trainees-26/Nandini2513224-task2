@@ -126,6 +126,9 @@ button {
   min-width: 190px;
   margin:10px;
 }
+.greet {
+    text-align: left;
+}
 
 .header-clock .clock-time {
   font-size: 20px;

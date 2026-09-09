@@ -76,22 +76,13 @@ setInterval(updateclock, 1000);
 
 
 // tasks part
-// TASKS PART
-
 let tasks = JSON.parse(localStorage.getItem("fitcheckTasks")) || [];
-
-
-// SAVE TASKS
 function savetasks() {
     localStorage.setItem("fitcheckTasks", JSON.stringify(tasks));
 }
-
-
-// DISPLAY TASKS
 function displaytasks() {
-
-    let pendingtasks = document.getElementById("pendingTasks");
-    let completedtasks = document.getElementById("completedTasks");
+    let pendingtasks = document.getElementById("pendingtasks");
+    let completedtasks = document.getElementById("completedtasks");
     if (!pendingtasks || !completedtasks) {
         return;
     }
@@ -183,8 +174,8 @@ if (addTaskButton) {
         displaytasks();
     });
 }
-let pendingTaskArea = document.getElementById("pendingTasks");
-let completedTaskArea = document.getElementById("completedTasks");
+let pendingTaskArea = document.getElementById("pendingtasks");
+let completedTaskArea = document.getElementById("completedtasks");
 
 if (pendingTaskArea) {
     pendingTaskArea.addEventListener("dragover", function (event) {
@@ -215,10 +206,8 @@ if (completedTaskArea) {
         }
     });
 }
-
-
-// DISPLAY TASKS WHEN PAGE LOADS
 displaytasks();
+
 
 // habits part
 
@@ -390,7 +379,7 @@ function saveWaterData(data) {
 
 function getTodayWater() {
     let data = getWaterData();
-    let today = getTodayKey();
+    let today = gettodaysdate();
     if (!data[today]) {
         data[today] = 0;
     }
@@ -428,7 +417,7 @@ waterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         let change =Number(button.getAttribute("data-water"));
         let data = getWaterData();
-        let today = getTodayKey();
+        let today = gettodaysdate();
         if (!data[today]) {
             data[today] = 0;
         }
@@ -478,7 +467,7 @@ function createWaterCharts() {
     for (let i = 6; i >= 0; i--) {
         let date = new Date();
         date.setDate(today.getDate() - i);
-        let key =date.getFullYear() + "+" +String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
+        let key =date.getFullYear() + "-" +String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
         let amount = data[key] || 0;
         let column =document.createElement("div");
         column.className = "chart-column";
@@ -500,7 +489,7 @@ function createWaterCharts() {
     for (let i = 29; i >= 0; i--) {
         let date = new Date();
         date.setDate(today.getDate() - i);
-        let key =date.getFullYear() +"-" +String(date.getMonth() + 1).padStart(2, "0") +"-" +String(date.getDate()).padStart(2, "0");
+        let key =date.getFullYear() + "-" +String(date.getMonth() + 1).padStart(2, "0") +"-" +String(date.getDate()).padStart(2, "0");
         let amount = data[key] || 0;
         let column =document.createElement("div");
         column.className = "chart-column";
@@ -585,7 +574,7 @@ function stopSleep() {
     let duration =
         endTime - startTime;
     let today =
-        getTodayKey();
+        gettodaysdate();
     let sleepRecord = {
         date: today,
         start: startTime,
@@ -1085,7 +1074,7 @@ function updateDashboard() {
     let sleepBar =document.getElementById("sleepBar");
 
     if (dashboardSleep) {
-        let today =getTodayKey();
+        let today =gettodaysdate();
         let todaySleep = null;
         for (let i = 0; i < sleepRecords.length; i++) {
             if (sleepRecords[i].date === today) {
