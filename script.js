@@ -781,4 +781,140 @@ if (activeSleep) {
 }
 
 
+// quotes page
+
+let currentQuote = {
+    text: "",
+    author: ""
+};
+
+async function getQuote() {
+    let quoteText =
+        document.getElementById("quoteText");
+    let quoteAuthor =
+        document.getElementById("quoteAuthor");
+    let dashboardQuote =
+        document.getElementById("dashboardQuote");
+    let dashboardAuthor =
+        document.getElementById("dashboardAuthor");
+
+    try {
+        let response =await fetch("https://dummyjson.com/quotes/random");
+        let data =await response.json();
+
+        currentQuote.text =data.quote;
+        currentQuote.author =data.author;
+        if (quoteText) {
+            quoteText.textContent ='"' + data.quote + '"';
+        }
+        if (quoteAuthor) {
+            quoteAuthor.textContent ="- " + data.author;
+        }
+        if (dashboardQuote) {
+            dashboardQuote.textContent ='"' + data.quote + '"';
+        }
+        if (dashboardAuthor) {
+            dashboardAuthor.textContent ="- " + data.author;
+        }
+    }
+    catch (error) {
+        if (quoteText) {
+            quoteText.textContent =
+                "Unable to load a quote right now.";
+        }
+        if (dashboardQuote) {
+            dashboardQuote.textContent ="Unable to load a quote right now.";
+        }
+    }
+}
+
+function saveQuote() {
+    if (currentQuote.text === "") {
+        return;
+    }
+
+    let savedQuotes =JSON.parse(localStorage.getItem("fitcheckSavedQuotes")) || [];
+    let alreadySaved = false;
+    for (let i = 0; i < savedQuotes.length; i++) {
+        if (savedQuotes[i].text === currentQuote.text) {
+            alreadySaved = true;
+        }
+    }
+    if (!alreadySaved) {
+        savedQuotes.push({
+            text: currentQuote.text,
+            author: currentQuote.author
+        });
+        localStorage.setItem("fitcheckSavedQuotes",JSON.stringify(savedQuotes)
+        );
+    }
+    displaySavedQuotes();
+}
+
+function displaySavedQuotes() {
+    let savedArea =
+        document.getElementById("savedQuotes");
+    if (!savedArea) {
+        return;
+    }
+    savedArea.innerHTML = "";
+    let savedQuotes =JSON.parse(localStorage.getItem("fitcheckSavedQuotes")) || [];
+    if (savedQuotes.length === 0) {
+        savedArea.innerHTML =
+            "<p>No saved quotes yet.</p>";
+        return;
+    }
+    for (let i = 0; i < savedQuotes.length; i++) {
+        let quoteBox =
+            document.createElement("div");
+        quoteBox.className =
+            "saved-quote";
+        quoteBox.innerHTML = `
+            <p>"${savedQuotes[i].text}"</p>
+
+            <p>- ${savedQuotes[i].author}</p>
+
+            <button onclick="deleteQuote(${i})">
+                Remove
+            </button>
+        `;
+        savedArea.appendChild(quoteBox);
+    }
+}
+function deleteQuote(index) {
+    let savedQuotes=JSON.parse(localStorage.getItem("fitcheckSavedQuotes")) || [];
+    savedQuotes.splice(index, 1);
+    localStorage.setItem("fitcheckSavedQuotes",JSON.stringify(savedQuotes)
+    );
+    displaySavedQuotes();
+}
+
+let quoteButton =document.getElementById("quoteButton");
+
+let newQuoteButton =document.getElementById("newQuoteButton");
+
+if (quoteButton) {
+    quoteButton.addEventListener("click",getQuote);
+}
+
+if (newQuoteButton) {
+    newQuoteButton.addEventListener(
+        "click",
+        getQuote
+    );
+}
+
+let saveQuoteButton =document.getElementById("saveQuoteButton");
+let saveDashboardQuote =document.getElementById("saveDashboardQuote");
+if (saveQuoteButton) {
+    saveQuoteButton.addEventListener("click",saveQuote);
+}
+
+if (saveDashboardQuote) {
+    saveDashboardQuote.addEventListener("click",saveQuote);
+}
+getQuote();
+displaySavedQuotes();
+
+// timer part
 
